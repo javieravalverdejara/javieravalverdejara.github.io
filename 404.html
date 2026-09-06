@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Javiera Valverde</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #0C0C0F;
+      --ink:      #E8E6F0;
+      --ink-soft: #9B98B0;
+      --accent:   #7C6FCD;
+      --accent2:  #B8AFFE;
+      --ff-head:  'Syne', sans-serif;
+      --ff-body:  'Inter', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--ff-body);
+      font-weight: 300;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 2rem;
+      -webkit-font-smoothing: antialiased;
+    }
+    .glow {
+      position: fixed;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(124,111,205,0.15) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .inner { position: relative; max-width: 480px; }
+    .num {
+      font-family: var(--ff-head);
+      font-size: clamp(6rem, 20vw, 10rem);
+      font-weight: 800;
+      line-height: 1;
+      color: var(--accent2);
+      opacity: 0.15;
+      letter-spacing: -0.04em;
+      margin-bottom: -1rem;
+    }
+    .title {
+      font-family: var(--ff-head);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .desc {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: var(--ff-body);
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn:hover { background: var(--accent2); color: #0C0C0F; border-color: var(--accent2); }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="inner">
+    <div class="num">404</div>
+    <h1 class="title">Esta página no existe</h1>
+    <p class="desc">Parece que el enlace está roto o la página fue movida.<br>Vuelve al inicio para seguir explorando.</p>
+    <a href="/" class="btn">Volver al inicio</a>
+  </div>
+</body>
+</html>
