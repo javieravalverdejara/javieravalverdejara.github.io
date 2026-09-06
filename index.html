@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Javiera Valverde — Diseñadora UX/UI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ─── */
+    :root {
+      --bg:        #0C0C0F;
+      --bg2:       #13131A;
+      --bg3:       #1A1A24;
+      --ink:       #E8E6F0;
+      --ink-soft:  #9B98B0;
+      --accent:    #7C6FCD;
+      --accent2:   #B8AFFE;
+      --border:    rgba(255,255,255,0.07);
+      --ff-head:   'Syne', sans-serif;
+      --ff-body:   'Inter', sans-serif;
+      --max:       1100px;
+      --gap:       clamp(2rem, 5vw, 4rem);
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--ff-body);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem clamp(1.5rem, 5vw, 3rem);
+      background: rgba(12,12,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+    .nav-logo span { color: var(--accent2); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ─── LAYOUT ─── */
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 3rem);
+    }
+    section { padding: var(--gap) 0; }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding-top: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,111,205,0.18) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -60%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      text-align: center;
+      max-width: 780px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--accent2);
+      border: 1px solid rgba(184,175,254,0.25);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.75rem;
+    }
+    .hero-name {
+      font-family: var(--ff-head);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    .hero-name em {
+      font-style: normal;
+      color: var(--accent2);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      color: var(--ink-soft);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: var(--ff-body);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); color: #0C0C0F; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink-soft);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { color: var(--ink); border-color: rgba(255,255,255,0.2); }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: var(--accent2);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: var(--ff-head);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+    }
+
+    /* ─── SOBRE MÍ ─── */
+    #sobre {
+      background: var(--bg2);
+    }
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .sobre-text p {
+      color: var(--ink-soft);
+      margin-bottom: 1rem;
+      font-size: 0.97rem;
+    }
+    .sobre-text p strong { color: var(--ink); font-weight: 500; }
+    .sobre-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .stat-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    .stat-num {
+      font-family: var(--ff-head);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent2);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .stat-desc {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      line-height: 1.4;
+    }
+
+    /* ─── PROYECTOS ─── */
+    #proyectos { background: var(--bg); }
+    .proyectos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .proyecto-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .proyecto-card:hover {
+      border-color: rgba(124,111,205,0.4);
+      transform: translateY(-4px);
+    }
+    .card-thumb {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .thumb-linaje  { background: linear-gradient(135deg, #1a1030 0%, #2d1f5e 100%); }
+    .thumb-github  { background: linear-gradient(135deg, #0d1117 0%, #1a2233 100%); }
+    .thumb-rediseno{ background: linear-gradient(135deg, #0f1f2e 0%, #1a3a50 100%); }
+    .card-body { padding: 1.5rem; }
+    .card-tipo {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--accent2);
+      margin-bottom: 0.5rem;
+    }
+    .card-title {
+      font-family: var(--ff-head);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      line-height: 1.25;
+    }
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      margin-bottom: 1.25rem;
+      line-height: 1.6;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .tag {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      background: rgba(124,111,205,0.15);
+      color: var(--accent2);
+      border: 1px solid rgba(124,111,205,0.2);
+    }
+    .card-link {
+      display: inline-block;
+      margin-top: 1.25rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--accent2);
+      border-bottom: 1px solid rgba(184,175,254,0.3);
+      transition: border-color 0.2s;
+    }
+    .card-link:hover { border-color: var(--accent2); }
+
+    /* ─── HABILIDADES ─── */
+    #habilidades { background: var(--bg2); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+    .skill-group {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    .skill-group-title {
+      font-family: var(--ff-head);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+      letter-spacing: 0.04em;
+    }
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .skill-list li {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      padding-left: 1rem;
+      position: relative;
+    }
+    .skill-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ─── CONTACTO ─── */
+    #contacto { background: var(--bg); }
+    .contacto-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .contacto-inner .section-title { margin-bottom: 1rem; }
+    .contacto-desc {
+      color: var(--ink-soft);
+      margin-bottom: 2rem;
+      font-size: 0.97rem;
+    }
+    .contacto-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem clamp(1.5rem, 5vw, 3rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 700px) {
+      .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">JV<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre mí</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <span class="hero-tag">Disponible para trabajar · Santiago, Chile</span>
+      <h1 class="hero-name">
+        Interfaces cercanas.<br><em>Diseño funcional.</em>
+      </h1>
+      <p class="hero-sub">
+        UX/UI Designer con enfoque en experiencias digitales claras, sistemas de diseño sólidos y procesos centrados en el usuario.
+      </p>
+      <div class="hero-ctas">
+        <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+        <a href="#contacto" class="btn btn-ghost">Hablemos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE MÍ -->
+  <section id="sobre">
+    <div class="container">
+      <div class="sobre-grid">
+        <div class="sobre-text">
+          <div class="section-header">
+            <p class="section-label">Sobre mí</p>
+            <h2 class="section-title">Javiera Valverde Jara</h2>
+          </div>
+          <p>Diseñadora UX/UI Junior con formación en <strong>Academia Desafío Latam</strong> (272 horas) y experiencia práctica diseñando sistemas de diseño completos en Figma.</p>
+          <p>Mi enfoque combina investigación de usuario, arquitectura de información y diseño visual para crear productos digitales que funcionen bien y se vean bien.</p>
+          <p>Actualmente ampliando mi perfil técnico con <strong>fundamentos de cloud computing</strong> a través del programa Generation Chile.</p>
+          <br>
+          <a href="mailto:javiera.valverdejara@gmail.com" class="btn btn-primary">Contáctame</a>
+        </div>
+        <div class="sobre-stats">
+          <div class="stat-card">
+            <div class="stat-num">272</div>
+            <div class="stat-desc">horas de formación en UX/UI</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-desc">proyectos de portafolio</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">100%</div>
+            <div class="stat-desc">consenso en validaciones con usuarios</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">E2E</div>
+            <div class="stat-desc">proceso completo: research hasta prototipo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Portafolio</p>
+        <h2 class="section-title">Proyectos seleccionados</h2>
+      </div>
+      <div class="proyectos-grid">
+
+        <div class="proyecto-card">
+          <div class="card-thumb thumb-linaje">🪡</div>
+          <div class="card-body">
+            <p class="card-tipo">Proyecto End-to-End · App Mobile</p>
+            <h3 class="card-title">Linaje Tattoo App</h3>
+            <p class="card-desc">Diseño completo de una app mobile para estudios de tatuajes: research, arquitectura, UI Kit y prototipo interactivo en Figma.</p>
+            <div class="card-tags">
+              <span class="tag">Figma</span>
+              <span class="tag">UI Kit</span>
+              <span class="tag">Research</span>
+              <span class="tag">Mobile-First</span>
+            </div>
+            <a href="https://behance.net/javieravalverde1" target="_blank" class="card-link">Ver en Behance →</a>
+          </div>
+        </div>
+
+        <div class="proyecto-card">
+          <div class="card-thumb thumb-github">💻</div>
+          <div class="card-body">
+            <p class="card-tipo">Proyecto Web · HTML & CSS</p>
+            <h3 class="card-title">CV Interactivo en GitHub Pages</h3>
+            <p class="card-desc">Diseño y desarrollo de un CV digital responsive usando HTML5, CSS3, Flexbox y Grid. Publicado como sitio estático en GitHub Pages.</p>
+            <div class="card-tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">Flexbox</span>
+              <span class="tag">Grid</span>
+            </div>
+            <a href="#" class="card-link">Ver proyecto →</a>
+          </div>
+        </div>
+
+        <div class="proyecto-card">
+          <div class="card-thumb thumb-rediseno">🔄</div>
+          <div class="card-body">
+            <p class="card-tipo">UX Case Study · Rediseño</p>
+            <h3 class="card-title">Rediseño UX — Próximamente</h3>
+            <p class="card-desc">Caso de estudio de rediseño de una plataforma digital chilena con foco en accesibilidad, flujos de usuario y consistencia visual.</p>
+            <div class="card-tags">
+              <span class="tag">UX Research</span>
+              <span class="tag">Figma</span>
+              <span class="tag">Accesibilidad</span>
+            </div>
+            <a href="#contacto" class="card-link">En desarrollo →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HABILIDADES -->
+  <section id="habilidades">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Herramientas y habilidades</p>
+        <h2 class="section-title">Con qué trabajo</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <p class="skill-group-title">Diseño UX/UI</p>
+          <ul class="skill-list">
+            <li>Figma</li>
+            <li>Sistemas de diseño</li>
+            <li>Prototipado interactivo</li>
+            <li>Diseño responsive</li>
+            <li>Mobile-first</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-title">Adobe Creative Suite</p>
+          <ul class="skill-list">
+            <li>Photoshop</li>
+            <li>Illustrator</li>
+            <li>Piezas para campañas digitales</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-title">Desarrollo Web</p>
+          <ul class="skill-list">
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>Flexbox & Grid</li>
+            <li>GitHub Pages</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-title">Investigación UX</p>
+          <ul class="skill-list">
+            <li>Entrevistas de usuario</li>
+            <li>Benchmarking</li>
+            <li>Pruebas de usabilidad</li>
+            <li>Investigación de campo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="container">
+      <div class="contacto-inner">
+        <div class="section-header">
+          <p class="section-label">Contacto</p>
+          <h2 class="section-title">¿Trabajamos juntos?</h2>
+        </div>
+        <p class="contacto-desc">
+          Estoy buscando oportunidades como Diseñadora UX/UI Junior en Santiago y LATAM. Si tienes un proyecto o una vacante, escríbeme.
+        </p>
+        <div class="contacto-links">
+          <a href="mailto:javiera.valverdejara@gmail.com" class="btn btn-primary">javiera.valverdejara@gmail.com</a>
+          <a href="https://behance.net/javieravalverde1" target="_blank" class="btn btn-ghost">Behance</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 Javiera Valverde Jara</span>
+    <span>Diseñado y desarrollado por mí · Santiago, Chile</span>
+  </footer>
+
+</body>
+</html>
