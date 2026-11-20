@@ -1,90 +1,152 @@
-/* ============================================
-   JAVIERA VALVERDE — Portfolio JS
-   script.js
-   Menú hamburguesa accesible para móvil
-   ============================================ */
+:root {
+  --bg: #0C0C0F;
+  --surface: #14141A;
+  --line: #26262F;
+  --ink: #E8E6F0;
+  --ink-soft: #9B98B0;
+  --accent: #7C6FCD;
+  --accent2: #B8AFFE;
+  --ff-head: 'Syne', system-ui, sans-serif;
+  --ff-body: 'Inter', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-weight: 300;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
 
-(function () {
+/* Header */
+header { position: relative; z-index: 10; padding: 1.5rem 0; }
+header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.brand { font-family: var(--ff-head); font-weight: 700; text-decoration: none; letter-spacing: -0.01em; }
+nav { display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--ink-soft); }
+nav a { text-decoration: none; transition: color 0.2s; }
+nav a:hover { color: var(--ink); }
 
-  const toggle = document.querySelector(".nav-toggle");
-  const nav    = document.getElementById("nav-links");
+/* Hero */
+.hero { position: relative; padding: clamp(4rem, 12vw, 8rem) 0 clamp(3rem, 8vw, 6rem); overflow: hidden; }
+.glow {
+  position: absolute; width: 560px; height: 560px; right: -160px; top: -120px;
+  background: radial-gradient(circle, rgba(124,111,205,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero h1 {
+  position: relative;
+  font-family: var(--ff-head);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 6.5vw, 4.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.75rem;
+}
+.hero h1 span { display: block; }
+.hero h1 .l2 { color: var(--accent2); }
+.role { font-size: 1.05rem; color: var(--ink); margin-bottom: 0.75rem; font-weight: 400; }
+.lead { max-width: 56ch; color: var(--ink-soft); font-size: 1.05rem; margin-bottom: 2.25rem; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.btn {
+  display: inline-block; padding: 0.8rem 1.75rem; border-radius: 6px;
+  font-size: 0.9rem; font-weight: 500; text-decoration: none;
+  border: 1px solid var(--accent); transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.primary:hover { background: var(--accent2); color: #0C0C0F; border-color: var(--accent2); }
+.btn.ghost { color: var(--ink); }
+.btn.ghost:hover { border-color: var(--accent2); color: var(--accent2); }
 
-  if (!toggle || !nav) return;
+/* Entrada del hero: la única animación de carga */
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1 span { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) both; }
+  .hero h1 .l2 { animation-delay: 0.12s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+}
 
+/* Secciones */
+section { padding: clamp(3rem, 8vw, 5.5rem) 0; border-top: 1px solid var(--line); }
+h2 { font-family: var(--ff-head); font-size: clamp(1.6rem, 4vw, 2.2rem); letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1.5rem; }
+.cols { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+@media (min-width: 820px) { .cols { grid-template-columns: 5fr 7fr; gap: 4rem; } }
+p + p { margin-top: 1rem; }
+.muted { color: var(--ink-soft); }
 
-  /* ============================================
-     ABRIR / CERRAR MENÚ
-     ============================================ */
+/* Proyecto */
+.project h3 { font-family: var(--ff-head); font-size: 1.35rem; margin-bottom: 0.25rem; }
+.meta { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1.25rem; }
+.figures { display: flex; flex-wrap: wrap; gap: 2rem; margin: 1.75rem 0; }
+.figures div { min-width: 7rem; }
+.figures strong { display: block; font-family: var(--ff-head); font-size: 2.4rem; line-height: 1; color: var(--accent2); }
+.figures span { font-size: 0.85rem; color: var(--ink-soft); }
+.steps { list-style: none; counter-reset: s; border-left: 1px solid var(--line); padding-left: 1.5rem; margin: 1.75rem 0; }
+.steps li { counter-increment: s; position: relative; padding-bottom: 1.1rem; }
+.steps li::before {
+  content: counter(s); position: absolute; left: calc(-1.5rem - 0.8rem); top: 0.1rem;
+  width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--bg);
+  border: 1px solid var(--accent); color: var(--accent2); font-size: 0.75rem;
+  display: grid; place-items: center;
+}
+.steps b { font-weight: 500; }
 
-  function setExpanded(value) {
+/* Habilidades */
+.skills { display: grid; gap: 1.5rem; }
+@media (min-width: 700px) { .skills { grid-template-columns: 1fr 1fr; } }
+.skills h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.4rem; }
+.skills p { color: var(--ink-soft); font-size: 0.95rem; }
 
-    toggle.setAttribute(
-      "aria-expanded",
-      String(value)
-    );
+/* Formación */
+.edu { list-style: none; }
+.edu li { padding: 1.1rem 0; border-bottom: 1px solid var(--line); display: grid; gap: 0.15rem; }
+.edu li:first-child { padding-top: 0; }
+.edu b { font-weight: 500; }
+.edu span { color: var(--ink-soft); font-size: 0.9rem; }
 
-    nav.classList.toggle(
-      "is-open",
-      value
-    );
+/* Contacto */
+.contact h2 { font-size: clamp(2rem, 6vw, 3.4rem); max-width: 18ch; }
+.links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem; }
+.links a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line); transition: color 0.2s, text-decoration-color 0.2s; }
+.links a:hover { color: var(--accent2); text-decoration-color: var(--accent2); }
+footer { padding: 2rem 0 3rem; color: var(--ink-soft); font-size: 0.85rem; }
+
+/* Menú hamburguesa (móvil) — funciona con assets/main.js */
+.nav-toggle {
+  display: none;
+  width: 2.75rem; height: 2.75rem;
+  align-items: center; justify-content: center;
+  background: transparent; border: 1px solid var(--line); border-radius: 6px;
+  color: var(--ink); cursor: pointer;
+}
+.nav-toggle:hover { border-color: var(--accent2); }
+.nav-toggle:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; }
+.nav-toggle .bars, .nav-toggle .bars::before, .nav-toggle .bars::after {
+  display: block; width: 1.2rem; height: 2px; background: currentColor; border-radius: 2px;
+  transition: transform 0.2s, background 0.2s;
+}
+.nav-toggle .bars { position: relative; }
+.nav-toggle .bars::before, .nav-toggle .bars::after { content: ""; position: absolute; left: 0; }
+.nav-toggle .bars::before { top: -6px; }
+.nav-toggle .bars::after  { top: 6px; }
+.nav-toggle[aria-expanded="true"] .bars { background: transparent; }
+.nav-toggle[aria-expanded="true"] .bars::before { transform: translateY(6px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .bars::after  { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 700px) {
+  .nav-toggle { display: inline-flex; }
+  #nav-links {
+    display: none;
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; gap: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 0.5rem 1.5rem;
   }
-
-
-  /* ============================================
-     BOTÓN HAMBURGUESA
-     ============================================ */
-
-  toggle.addEventListener("click", function () {
-
-    const isExpanded =
-      this.getAttribute("aria-expanded") === "true";
-
-    setExpanded(!isExpanded);
-
-  });
-
-
-  /* ============================================
-     CERRAR AL SELECCIONAR UNA SECCIÓN
-     ============================================ */
-
-  nav.addEventListener("click", function (event) {
-
-    if (event.target.closest("a")) {
-      setExpanded(false);
-    }
-
-  });
-
-
-  /* ============================================
-     CERRAR CON ESCAPE  →  foco vuelve al botón
-     ============================================ */
-
-  document.addEventListener("keydown", function (event) {
-
-    if (event.key === "Escape") {
-      setExpanded(false);
-      toggle.focus();
-    }
-
-  });
-
-
-  /* ============================================
-     CERRAR SI SE HACE CLICK FUERA DEL MENÚ
-     ============================================ */
-
-  document.addEventListener("click", function (event) {
-
-    const clickedInsideNav = nav.contains(event.target);
-    const clickedToggle    = toggle.contains(event.target);
-    const isOpen           = nav.classList.contains("is-open");
-
-    if (isOpen && !clickedInsideNav && !clickedToggle) {
-      setExpanded(false);
-    }
-
-  });
-
-})();
+  #nav-links.is-open { display: flex; }
+  #nav-links a { padding: 0.9rem 0; font-size: 1rem; border-bottom: 1px solid var(--line); }
+  #nav-links a:last-child { border-bottom: 0; }
+}
