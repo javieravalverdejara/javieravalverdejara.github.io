@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/assets/styles.css" />
   <script src="/assets/main.js" defer></script>
 </head>
@@ -16,7 +15,10 @@
   <header>
     <div class="wrap">
       <a class="brand" href="#inicio">Javiera Valverde</a>
-      <nav aria-label="Principal">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menú">
+        <span class="bars" aria-hidden="true"></span>
+      </button>
+      <nav id="nav-links" aria-label="Principal">
         <a href="#proyecto">Proyecto</a>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#formacion">Formación</a>
