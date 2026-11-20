@@ -47,7 +47,7 @@ nav a:hover { color: var(--ink); }
   letter-spacing: -0.04em;
   margin-bottom: 1.75rem;
 }
-.hero h1 span { display: block; }
+.hero h1 { text-wrap: balance; }
 .hero h1 .l2 { color: var(--accent2); }
 .role { font-size: 1.05rem; color: var(--ink); margin-bottom: 0.75rem; font-weight: 400; }
 .lead { max-width: 56ch; color: var(--ink-soft); font-size: 1.05rem; margin-bottom: 2.25rem; }
@@ -64,8 +64,7 @@ nav a:hover { color: var(--ink); }
 
 /* Entrada del hero: la única animación de carga */
 @media (prefers-reduced-motion: no-preference) {
-  .hero h1 span { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) both; }
-  .hero h1 .l2 { animation-delay: 0.12s; }
+  .hero h1 { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) both; }
   @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
 }
 
